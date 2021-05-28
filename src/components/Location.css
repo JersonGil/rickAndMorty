@@ -1,0 +1,19 @@
+.content h3{
+    color: #2FC3C5;
+}
+
+div.card-list{
+width: 100%;
+}
+
+.Location .pagination{
+    padding-left: 16px;
+}
+.Location .pagination a{
+    color: #2FC3C5;
+    text-decoration: none;
+}
+div.card-list label{
+    color: #a4a4a4;
+}
+

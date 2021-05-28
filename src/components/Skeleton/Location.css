@@ -1,18 +1,20 @@
-div.card {
-    /* margin-bottom: 1rem; */
-    box-shadow: 0 0 6.4px 4px rgba(0,0,0,.06275);
-    border-radius: 4px;
-    background-color: #2D3848;
-    grid-template-columns: 200px 200px minmax(200px,auto);
+.location > .location-pagination{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    padding: 10px;
-  }
-.card-list {
-    /* margin-bottom: 1rem; */
+    flex-wrap: wrap;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.location > .location-pagination > .block{
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
+    display: block;
+    animation: pulse 1s infinite ease-in-out;
+    
+}
+
+.location .card-list {
     box-shadow: 0 0 6.4px 4px rgba(0,0,0,.06275);
     border-radius: 4px;
     background-color: #2D3848;
@@ -25,39 +27,21 @@ div.card {
     padding: 10px;
 }
 
-.card-list .content {
-    width: 100%;
-}
-  p {
-    color: #222121;
-    font-size: 18px;
-    font-weight: bold;
-  }
-  .card img {
-    min-width: 300px;
-    min-height: 300px;
-  }
-  .line {
-    height: 12px;
+  .location .line {
+    height: 24px;
     margin: 10px;
+    max-width: 100px;
     animation: pulse 1s infinite ease-in-out;
     border-radius: 5px;
   }
-  .skeleton-image {
-    height: 300px;
+  .location .line:last-child {
+    height: 18px;
     margin: 10px;
+    max-width: 120px;
     animation: pulse 1s infinite ease-in-out;
     border-radius: 5px;
   }
-  .card .content div:nth-child(1){
-    width: 300px;
-  }
-  .card .content div:nth-child(2){
-    width: 300px;
-  }
-  .card .content div:nth-child(3){
-    width: 270px;
-  }
+
   @keyframes pulse {
     0% {
       background-color: rgba(165,165,165,.1)
