@@ -14,6 +14,7 @@ import Character from './Character'
 import App from './App'
 import Locations from './components/Location'
 import Header from './components/Header'
+import Residents from './components/Residents'
 
 const client = new ApolloClient ({
   cache: new InMemoryCache(),
@@ -33,6 +34,7 @@ ReactDOM.render(
         <Route exact path="/locations">
           <Locations />
         </Route>
+        <Route exact path="/residents/:id" children={<Residents />} />
       </Switch>
     </Router>
     </React.StrictMode>
