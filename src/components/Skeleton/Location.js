@@ -14,6 +14,12 @@ export default function Location() {
           <div className='block'></div>
           <div className='block'></div>
       </div>
+      <div className='location-block'>
+          <div className='block1'></div>
+          <div className='block2'></div>
+          <div className='block3'></div>
+          <div className='block4'></div>
+      </div>
       <div className="card-list">
             <div className="content">
                 <div className="row">

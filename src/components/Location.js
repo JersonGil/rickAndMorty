@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { gql, useQuery } from '@apollo/client';
-import Skeleton from './Skeleton/skeleton'
+import Location from './Skeleton/Location'
 import Pagination from "react-js-pagination";
 import { Link } from 'react-router-dom'
 import Dropdown from './Dropdown'
@@ -46,7 +46,11 @@ function Locations() {
         {
           error && <Alert variant="danger">error</Alert>
         }
-        <div className="row my-4">
+
+      {
+        loading ? (<Location />) : (
+          <div className="card-columns justify-content-center">
+          <div className="row my-4">
           <Pagination
             activePage={activePage}
             itemsCountPerPage={10}
@@ -76,9 +80,6 @@ function Locations() {
             <Button onClick={() => setFilter({ name: '', type: '', dimension: '' })} variant="primary">Reset Filters</Button>
           </div>
         </div>
-      {
-        loading ? (<Skeleton />) : (
-          <div className="card-columns justify-content-center">
             {
               data && data.locations.results.map(result => (
                 <div className="card-list">
