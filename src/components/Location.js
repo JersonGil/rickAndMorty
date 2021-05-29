@@ -46,40 +46,39 @@ function Locations() {
         {
           error && <Alert variant="danger">error</Alert>
         }
-
+        <div className="d-flex justify-content-center button-filters">
+          <Dropdown
+            data={data && data}
+            setFilter={setFilter}
+            title="Name"
+            type="name"
+          />
+          <Dropdown
+            data={data && data}
+            setFilter={setFilter}
+            title="Type"
+            type="type"
+          />
+          <Dropdown
+            data={data && data}
+            setFilter={setFilter}
+            title="Dimension"
+            type="dimension"
+          />
+          <Button onClick={() => setFilter({ name: '', type: '', dimension: '' })} variant="primary">Reset Filters</Button>
+        </div>
       {
         loading ? (<Location />) : (
           <div className="card-columns justify-content-center">
-          <div className="row my-4">
-          <Pagination
-            activePage={activePage}
-            itemsCountPerPage={10}
-            totalItemsCount={data && data.locations.info.count}
-            pageRangeDisplayed={5}
-            onChange={handlePageChange}
-          />
-          <div className="d-flex justify-content-center button-filters">
-            <Dropdown
-              data={data && data}
-              setFilter={setFilter}
-              title="Name"
-              type="name"
-            />
-            <Dropdown
-              data={data && data}
-              setFilter={setFilter}
-              title="Type"
-              type="type"
-            />
-            <Dropdown
-              data={data && data}
-              setFilter={setFilter}
-              title="Dimension"
-              type="dimension"
-            />
-            <Button onClick={() => setFilter({ name: '', type: '', dimension: '' })} variant="primary">Reset Filters</Button>
+            <div className="row my-4">
+              <Pagination
+                activePage={activePage}
+                itemsCountPerPage={10}
+                totalItemsCount={data && data.locations.info.count}
+                pageRangeDisplayed={5}
+                onChange={handlePageChange}
+              />
           </div>
-        </div>
             {
               data && data.locations.results.map(result => (
                 <div className="card-list">

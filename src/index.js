@@ -27,14 +27,10 @@ ReactDOM.render(
     <Header />
     <Router>
       <Switch>
-        <Route exact path="/">
-          <App />
-        </Route>
-        <Route path="/character/:id" children={<Character />} />
-        <Route exact path="/locations">
-          <Locations />
-        </Route>
-        <Route exact path="/residents/:id" children={<Residents />} />
+        <Route path="/character/:id" component={Character} />
+        <Route exact path="/locations" component={Locations} />
+        <Route exact path="/residents/:id" component={Residents} />
+        <Route exact path="/" component={App} />
       </Switch>
     </Router>
     </React.StrictMode>
