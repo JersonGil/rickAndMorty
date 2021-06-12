@@ -4,7 +4,8 @@ import './index.css';
 import './components/Skeleton/skeleton.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from './reportWebVitals';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { store } from '../src/store/index'
+import { Provider } from 'react-redux'
 import {
   BrowserRouter as Router,
   Route,
@@ -16,13 +17,9 @@ import Locations from './components/Location'
 import Header from './components/Header'
 import Residents from './components/Residents'
 
-const client = new ApolloClient ({
-  cache: new InMemoryCache(),
-	uri: 'https://rickandmortyapi.com/graphql/' 
-})
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <Provider store={store}>
     <React.StrictMode>
     <Header />
     <Router>
@@ -34,7 +31,7 @@ ReactDOM.render(
       </Switch>
     </Router>
     </React.StrictMode>
-  </ApolloProvider>,
+  </Provider>,
   document.getElementById('root')
 );
 

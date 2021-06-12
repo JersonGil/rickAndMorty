@@ -1,25 +1,13 @@
 import './App.css';
-import { gql, useQuery } from '@apollo/client'
 import { Link } from "react-router-dom"
 import Skeleton from './components/Skeleton/skeleton'
-//  import Location from './components/Skeleton/Location'
-const getCharacters = gql`
-query getCharacters {
-  characters {
-    results {
-      id
-      name
-      status
-      image
-    }
-  }
-}
-`
+import { useGetCharactersQuery } from './services/characteres'
 
 function App() {
-  const { loading, data, error } = useQuery(getCharacters)
- if (loading) return (<Skeleton />)
-  if (error) return `Error: ${error}`
+  const { isError, isLoading, data, error } = useGetCharactersQuery()
+
+  if (isLoading) return (<Skeleton />)
+  if (isError) return `Error: ${error}`
 
   return (
     <div className="App container card-columns">
