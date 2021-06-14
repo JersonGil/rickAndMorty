@@ -1,17 +1,28 @@
+
+import React, { useEffect } from 'react'
 import './App.css';
 import { Link } from "react-router-dom"
 import Skeleton from './components/Skeleton/skeleton'
-import { useGetCharactersQuery } from './services/characteres'
+import { characterSelector, fetchCharacters } from './slices/characteres'
+import { useDispatch, useSelector } from 'react-redux'
+import { isNull } from 'lodash'
 
 function App() {
-  const { isError, isLoading, data, error } = useGetCharactersQuery()
+  const { characteres, loading, hasErrors } = useSelector(characterSelector)
+  const dispatch = useDispatch()
 
-  if (isLoading) return (<Skeleton />)
-  if (isError) return `Error: ${error}`
+  // dispatch our thunk when component first mounts
+  useEffect(() => {
+    dispatch(fetchCharacters())
+  }, [dispatch])
+
+
+  if (loading) return (<Skeleton />)
+  if (hasErrors) return `Error: ${hasErrors.data}`
 
   return (
     <div className="App container card-columns">
-      {data.characters.results.map(post => (
+      {!isNull(characteres) && characteres.results.map(post => (
           <div className="card" key={post.id}>
             <div className="content">
               <img src={post.image} alt={`Imagen de ${post.name}`}/>

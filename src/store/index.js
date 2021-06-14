@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { rickandmortyApi } from '../services/characteres'
+import rootReducer from '../slices'
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
-    [rickandmortyApi.reducerPath]: rickandmortyApi.reducer,
+    rootReducer,
+    [rickandmortyApi.reducerPath]: rickandmortyApi.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

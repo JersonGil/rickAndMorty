@@ -2,22 +2,35 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { request, gql, ClientError } from 'graphql-request'
 
-const graphqlBaseQuery = ({ baseUrl }) => async ({ body }) => {
+export const graphqlBaseQuery = async (baseUrl, body) => {
     try {
       const result = await request(baseUrl, body)
       return { data: result }
     } catch (error) {
       if (error instanceof ClientError) {
-        return { error: { status: error.status, data: error.data } }
+        return { error: { status: error.response.status, data: error.message } }
       }
       return { error: { status: 500, data: error } }
     }
 }
 
+const graphqlBaseQuery2 = ({ baseUrl }) => async ({ body }) => {
+  try {
+    const result = await request(baseUrl, body)
+    return { data: result }
+  } catch (error) {
+    if (error instanceof ClientError) {
+      return { error: { status: error.response.status, data: error.message } }
+    }
+    return { error: { status: 500, data: error } }
+  }
+}
+
 // Define a service using a base URL and expected endpoints
 export const rickandmortyApi = createApi({
   reducerPath: 'rickandmortyApi',
-  baseQuery: graphqlBaseQuery({ baseUrl: 'https://rickandmortyapi.com/graphql/' }),
+  baseQuery: graphqlBaseQuery2({ baseUrl: 'https://rickandmortyapi.com/graphql/' }),
+  refetchOnFocus: true,
   endpoints: (builder) => ({
     getCharacters: builder.query({
       query: () => ({
