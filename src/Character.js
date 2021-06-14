@@ -1,25 +1,13 @@
 import React from 'react'
-import { gql, useQuery } from '@apollo/client';
+import { useGetCharacterQuery } from './services/characteres'
 import { useParams } from 'react-router-dom'
 import Skeleton from './components/Skeleton/skeleton'
 
-const getCharacter = gql`
-  query getCharacter($id: ID!) {
-    character(id: $id) {
-      id
-      name
-      status
-      species
-      image
-    }
-  }
-`
-
 export default function Character() {
   const { id } = useParams()
-  const { loading, data, error } = useQuery(getCharacter, { variables: { id }} )
-  if (loading) return (<Skeleton/>)
-  if (error) return `Error: ${error}`
+  const { isError, isLoading, data, error } = useGetCharacterQuery(id)
+  if (isLoading) return (<Skeleton/>)
+  if (isError) return `Error: ${error}`
   
   return (
     <div className="App container mt-5">

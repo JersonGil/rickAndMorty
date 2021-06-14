@@ -36,9 +36,25 @@ export const rickandmortyApi = createApi({
       }),
       characteresResponse: (response) => response.data,
     }),
+    getCharacter: builder.query({
+      query: (id) => ({
+        body: gql`
+         query {
+          character(id: ${id}) {
+            id
+            name
+            status
+            species
+            image
+          }
+         }
+        `,
+      }),
+      characterResponse: (response) => response.data,
+    }),
    })
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetCharactersQuery } = rickandmortyApi
+export const { useGetCharactersQuery, useGetCharacterQuery } = rickandmortyApi
